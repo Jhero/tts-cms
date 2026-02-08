@@ -1,0 +1,704 @@
+components:
+    responses:
+        errorResponse:
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/Response'
+            description: Error Response
+        successResponse:
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/Response'
+            description: Success Response
+    schemas:
+        CreateQuestionRequest:
+            properties:
+                answer:
+                    type: string
+                    x-go-name: Answer
+                content:
+                    type: string
+                    x-go-name: Content
+                title:
+                    type: string
+                    x-go-name: Title
+            type: object
+            x-go-package: github.com/jovan/mybanksoal-api/internal/handler
+        LoginRequest:
+            properties:
+                password:
+                    type: string
+                    x-go-name: Password
+                username:
+                    type: string
+                    x-go-name: Username
+            type: object
+            x-go-package: github.com/jovan/mybanksoal-api/internal/handler
+        QuestionStatus:
+            type: string
+            x-go-package: github.com/jovan/mybanksoal-api/internal/entity
+        RegisterRequest:
+            properties:
+                api_key:
+                    type: string
+                    x-go-name: APIKey
+                password:
+                    type: string
+                    x-go-name: Password
+                role:
+                    type: string
+                    x-go-name: Role
+                username:
+                    type: string
+                    x-go-name: Username
+            type: object
+            x-go-package: github.com/jovan/mybanksoal-api/internal/handler
+        Response:
+            properties:
+                data:
+                    x-go-name: Data
+                error:
+                    type: string
+                    x-go-name: Error
+                message:
+                    type: string
+                    x-go-name: Message
+                success:
+                    type: boolean
+                    x-go-name: Success
+            type: object
+            x-go-package: github.com/jovan/mybanksoal-api/pkg/response
+        UpdateQuestionRequest:
+            properties:
+                answer:
+                    type: string
+                    x-go-name: Answer
+                content:
+                    type: string
+                    x-go-name: Content
+                title:
+                    type: string
+                    x-go-name: Title
+            type: object
+            x-go-package: github.com/jovan/mybanksoal-api/internal/handler
+        UpdateStatusRequest:
+            properties:
+                status:
+                    $ref: '#/components/schemas/QuestionStatus'
+            type: object
+            x-go-package: github.com/jovan/mybanksoal-api/internal/handler
+        CrosswordQuestion:
+            properties:
+                id:
+                    type: integer
+                number:
+                    type: integer
+                clue:
+                    type: string
+                answer:
+                    type: string
+                isAcross:
+                    type: boolean
+                row:
+                    type: integer
+                col:
+                    type: integer
+            type: object
+        CrosswordLevel:
+            properties:
+                id:
+                    type: integer
+                title:
+                    type: string
+                questions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/CrosswordQuestion'
+                created_at:
+                    type: string
+                    format: date-time
+                updated_at:
+                    type: string
+                    format: date-time
+            type: object
+        SubmitLevelRequest:
+            properties:
+                answers:
+                    type: object
+                    additionalProperties:
+                        type: string
+            type: object
+            x-go-package: github.com/jovan/mybanksoal-api/internal/handler
+        LeaderboardEntry:
+            properties:
+                user_id:
+                    type: integer
+                username:
+                    type: string
+                total_score:
+                    type: integer
+            type: object
+            x-go-package: github.com/jovan/mybanksoal-api/internal/repository
+        CreateCrosswordQuestionRequest:
+            properties:
+                level_id:
+                    type: integer
+                number:
+                    type: integer
+                clue:
+                    type: string
+                answer:
+                    type: string
+                isAcross:
+                    type: boolean
+                row:
+                    type: integer
+                col:
+                    type: integer
+                questions_id:
+                    type: integer
+            type: object
+            x-go-package: github.com/jovan/mybanksoal-api/internal/handler
+        UpdateCrosswordQuestionRequest:
+            properties:
+                level_id:
+                    type: integer
+                number:
+                    type: integer
+                clue:
+                    type: string
+                answer:
+                    type: string
+                isAcross:
+                    type: boolean
+                row:
+                    type: integer
+                col:
+                    type: integer
+                questions_id:
+                    type: integer
+            type: object
+            x-go-package: github.com/jovan/mybanksoal-api/internal/handler
+        CreateLevelRequest:
+            properties:
+                name:
+                    type: string
+            type: object
+            x-go-package: github.com/jovan/mybanksoal-api/internal/handler
+        ImportQuestion:
+            properties:
+                number:
+                    type: integer
+                clue:
+                    type: string
+                answer:
+                    type: string
+                isAcross:
+                    type: boolean
+                row:
+                    type: integer
+                col:
+                    type: integer
+            type: object
+            x-go-package: github.com/jovan/mybanksoal-api/internal/handler
+        ImportLevelItem:
+            properties:
+                id:
+                    type: integer
+                title:
+                    type: string
+                questions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ImportQuestion'
+            type: object
+            x-go-package: github.com/jovan/mybanksoal-api/internal/handler
+        ImportLevelsRequest:
+            properties:
+                levels:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ImportLevelItem'
+            type: object
+            x-go-package: github.com/jovan/mybanksoal-api/internal/handler
+        UpdateLevelRequest:
+            properties:
+                name:
+                    type: string
+            type: object
+            x-go-package: github.com/jovan/mybanksoal-api/internal/handler
+    securitySchemes:
+        bearerAuth:
+            in: header
+            name: Authorization
+            type: apiKey
+info:
+    contact:
+        email: support@swagger.io
+        name: API Support
+        url: http://www.swagger.io/support
+    description: This is a sample Question Bank API with RBAC and Status Workflow.
+    license:
+        name: Apache 2.0
+        url: http://www.apache.org/licenses/LICENSE-2.0.html
+    termsOfService: http://swagger.io/terms/
+    title: MyBankSoal API.
+    version: "1.0"
+openapi: 3.0.3
+paths:
+    /auth/login:
+        post:
+            description: Login with username and password to get JWT token
+            operationId: loginUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/LoginRequest'
+                description: Login Request Body
+                required: true
+                x-originalParamName: Body
+            responses:
+                "200":
+                    $ref: '#/components/responses/successResponse'
+                "401":
+                    $ref: '#/components/responses/errorResponse'
+            tags:
+                - auth
+    /auth/register:
+        post:
+            description: Register a new user with username, password, and optional role
+            operationId: registerUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/RegisterRequest'
+                description: Register Request Body
+                required: true
+                x-originalParamName: Body
+            responses:
+                "201":
+                    $ref: '#/components/responses/successResponse'
+                "400":
+                    $ref: '#/components/responses/errorResponse'
+            tags:
+                - auth
+    /questions:
+        get:
+            description: Get a list of questions with pagination
+            operationId: listQuestions
+            parameters:
+                - description: Offset
+                  in: query
+                  name: offset
+                  schema:
+                    format: int64
+                    type: integer
+                  x-go-name: Offset
+                - description: Limit
+                  in: query
+                  name: limit
+                  schema:
+                    format: int64
+                    type: integer
+                  x-go-name: Limit
+            responses:
+                "200":
+                    $ref: '#/components/responses/successResponse'
+                "500":
+                    $ref: '#/components/responses/errorResponse'
+            tags:
+                - questions
+        post:
+            description: Create a new question (starts as draft)
+            operationId: createQuestion
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateQuestionRequest'
+                description: Create Question Request Body
+                required: true
+                x-originalParamName: Body
+            responses:
+                "201":
+                    $ref: '#/components/responses/successResponse'
+                "400":
+                    $ref: '#/components/responses/errorResponse'
+            tags:
+                - questions
+    /questions/{id}:
+        delete:
+            description: Delete a question by ID
+            operationId: deleteQuestion
+            parameters:
+                - description: Question ID
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                    format: int64
+                    type: integer
+                  x-go-name: ID
+            responses:
+                "200":
+                    $ref: '#/components/responses/successResponse'
+                "400":
+                    $ref: '#/components/responses/errorResponse'
+            tags:
+                - questions
+        get:
+            description: Get question details
+            operationId: getQuestion
+            parameters:
+                - description: Question ID
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                    format: int64
+                    type: integer
+                  x-go-name: ID
+            responses:
+                "200":
+                    $ref: '#/components/responses/successResponse'
+                "404":
+                    $ref: '#/components/responses/errorResponse'
+            tags:
+                - questions
+        put:
+            description: Update question content
+            operationId: updateQuestion
+            parameters:
+                - description: Question ID
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                    format: int64
+                    type: integer
+                  x-go-name: ID
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateQuestionRequest'
+                description: Update Question Request Body
+                required: true
+                x-originalParamName: Body
+            responses:
+                "200":
+                    $ref: '#/components/responses/successResponse'
+                "400":
+                    $ref: '#/components/responses/errorResponse'
+            tags:
+                - questions
+    /questions/{id}/status:
+        patch:
+            description: Update question status (draft, publish, unpublish)
+            operationId: updateQuestionStatus
+            parameters:
+                - description: Question ID
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                    format: int64
+                    type: integer
+                  x-go-name: ID
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateStatusRequest'
+                description: Update Status Request Body
+                required: true
+                x-originalParamName: Body
+            responses:
+                "200":
+                    $ref: '#/components/responses/successResponse'
+                "400":
+                    $ref: '#/components/responses/errorResponse'
+            tags:
+                - questions
+    /crosswords/questions:
+        get:
+            description: Get all crossword questions, optionally filtered by level_id
+            operationId: getCrosswordQuestions
+            parameters:
+                - description: Level ID to filter by
+                  in: query
+                  name: level_id
+                  schema:
+                    type: integer
+                  x-go-name: LevelID
+            responses:
+                "200":
+                    $ref: '#/components/responses/successResponse'
+                "500":
+                    $ref: '#/components/responses/errorResponse'
+            tags:
+                - crossword-questions
+        post:
+            description: Create a new crossword question
+            operationId: createCrosswordQuestion
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateCrosswordQuestionRequest'
+                required: true
+            responses:
+                "201":
+                    $ref: '#/components/responses/successResponse'
+                "400":
+                    $ref: '#/components/responses/errorResponse'
+                "500":
+                    $ref: '#/components/responses/errorResponse'
+            tags:
+                - crossword-questions
+    /crosswords/questions/{id}:
+        get:
+            description: Get a crossword question by ID
+            operationId: getCrosswordQuestion
+            parameters:
+                - description: Question ID
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                    format: int64
+                    type: integer
+                  x-go-name: ID
+            responses:
+                "200":
+                    $ref: '#/components/responses/successResponse'
+                "404":
+                    $ref: '#/components/responses/errorResponse'
+            tags:
+                - crossword-questions
+        put:
+            description: Update a crossword question
+            operationId: updateCrosswordQuestion
+            parameters:
+                - description: Question ID
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                    format: int64
+                    type: integer
+                  x-go-name: ID
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateCrosswordQuestionRequest'
+                required: true
+            responses:
+                "200":
+                    $ref: '#/components/responses/successResponse'
+                "400":
+                    $ref: '#/components/responses/errorResponse'
+                "500":
+                    $ref: '#/components/responses/errorResponse'
+            tags:
+                - crossword-questions
+        delete:
+            description: Delete a crossword question
+            operationId: deleteCrosswordQuestion
+            parameters:
+                - description: Question ID
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                    format: int64
+                    type: integer
+                  x-go-name: ID
+            responses:
+                "200":
+                    $ref: '#/components/responses/successResponse'
+                "500":
+                    $ref: '#/components/responses/errorResponse'
+            tags:
+                - crossword-questions
+    /crosswords/import:
+        post:
+            description: Import levels and questions in bulk
+            operationId: importLevels
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ImportLevelsRequest'
+                required: true
+            responses:
+                "201":
+                    $ref: '#/components/responses/successResponse'
+                "400":
+                    $ref: '#/components/responses/errorResponse'
+                "500":
+                    $ref: '#/components/responses/errorResponse'
+            security:
+                - bearerAuth: []
+            tags:
+                - crosswords
+    /crosswords/levels:
+        get:
+            description: Get all crossword levels
+            operationId: getLevels
+            responses:
+                "200":
+                    $ref: '#/components/responses/successResponse'
+                "500":
+                    $ref: '#/components/responses/errorResponse'
+            tags:
+                - crosswords
+        post:
+            description: Create a new level
+            operationId: createLevel
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateLevelRequest'
+                required: true
+            responses:
+                "201":
+                    $ref: '#/components/responses/successResponse'
+                "400":
+                    $ref: '#/components/responses/errorResponse'
+                "500":
+                    $ref: '#/components/responses/errorResponse'
+            security:
+                - bearerAuth: []
+            tags:
+                - crosswords
+    /crosswords/levels/{id}:
+        delete:
+            description: Delete a level
+            operationId: deleteLevel
+            parameters:
+                - description: Level ID
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                    format: int64
+                    type: integer
+                  x-go-name: ID
+            responses:
+                "200":
+                    $ref: '#/components/responses/successResponse'
+                "500":
+                    $ref: '#/components/responses/errorResponse'
+            tags:
+                - crosswords
+        get:
+            description: Get level details
+            operationId: getLevelCategory
+            parameters:
+                - description: Level Category ID
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                    format: int64
+                    type: integer
+                  x-go-name: ID
+            responses:
+                "200":
+                    $ref: '#/components/responses/successResponse'
+                "404":
+                    $ref: '#/components/responses/errorResponse'
+            tags:
+                - crosswords
+        put:
+            description: Update a level
+            operationId: updateLevel
+            parameters:
+                - description: Level ID
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                    format: int64
+                    type: integer
+                  x-go-name: ID
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateLevelRequest'
+                required: true
+            responses:
+                "200":
+                    $ref: '#/components/responses/successResponse'
+                "400":
+                    $ref: '#/components/responses/errorResponse'
+                "500":
+                    $ref: '#/components/responses/errorResponse'
+            tags:
+                - crosswords
+    /crosswords/levels/{id}/submit:
+        post:
+            description: Submit answers for a level
+            operationId: submitLevel
+            parameters:
+                - description: Level ID
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                    format: int64
+                    type: integer
+                  x-go-name: ID
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/SubmitLevelRequest'
+                required: true
+            responses:
+                "200":
+                    $ref: '#/components/responses/successResponse'
+                "400":
+                    $ref: '#/components/responses/errorResponse'
+                "500":
+                    $ref: '#/components/responses/errorResponse'
+            security:
+                - bearerAuth: []
+            tags:
+                - crosswords
+    /crosswords/leaderboard:
+        get:
+            description: Get leaderboard
+            operationId: getLeaderboard
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                properties:
+                                    data:
+                                        items:
+                                            $ref: '#/components/schemas/LeaderboardEntry'
+                                        type: array
+                                    message:
+                                        type: string
+                                    success:
+                                        type: boolean
+                                type: object
+                    description: Success Response
+                "500":
+                    $ref: '#/components/responses/errorResponse'
+            security:
+                - bearerAuth: []
+            tags:
+                - crosswords
+security:
+    - bearerAuth: []
