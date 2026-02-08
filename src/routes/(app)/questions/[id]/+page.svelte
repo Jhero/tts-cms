@@ -8,6 +8,7 @@
   import Textarea from '$lib/components/ui/Textarea.svelte';
   import Label from '$lib/components/ui/Label.svelte';
   import Card from '$lib/components/ui/Card.svelte';
+  import Loader from '$lib/components/ui/Loader.svelte';
 
   let title = $state('');
   let content = $state('');

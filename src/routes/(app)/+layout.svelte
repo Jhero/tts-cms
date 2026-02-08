@@ -37,7 +37,13 @@
               Questions
             </a>
             <a href="/crosswords/levels" class="{isActive('/crosswords/levels')} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-              Crossword Levels
+              Levels
+            </a>
+            <a href="/crosswords/questions" class="{isActive('/crosswords/questions')} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+              Crossword
+            </a>
+            <a href="/users/new" class="{isActive('/users/new')} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+              Create User
             </a>
           </div>
         </div>

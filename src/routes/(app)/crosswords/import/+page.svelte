@@ -40,8 +40,6 @@
     <Button variant="ghost" onclick={() => goto('/crosswords/levels')}>&larr; Back to Levels</Button>
 </div>
 
-<h1 class="text-2xl font-semibold text-gray-900 mb-6">Import Crossword Levels</h1>
-
 <Card>
     <form class="space-y-6" onsubmit={handleSubmit}>
         <div>

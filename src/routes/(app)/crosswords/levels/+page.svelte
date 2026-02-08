@@ -69,9 +69,8 @@
 </script>
 
 <div class="flex justify-between items-center mb-6">
-  <h1 class="text-2xl font-semibold text-gray-900">Crossword Levels</h1>
+  <h1 class="text-2xl font-semibold text-gray-900">Levels</h1>
   <div class="space-x-2">
-    <Button variant="secondary" onclick={() => goto('/crosswords/import')}>Import JSON</Button>
     <Button onclick={() => goto('/crosswords/levels/new')}>Add Level</Button>
   </div>
 </div>
